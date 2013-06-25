@@ -3,7 +3,7 @@ HnCloneRails::Application.routes.draw do
   root :to => 'posts#index'
 
   # #Post Routes
-  resources :posts :only => [:index, :create, :new, :show, :delete]
+  resources :posts, :only => [:index, :create, :new, :show, :delete]
   # get 'posts' => 'posts#index'
 
   # get 'posts/new' => 'posts#new'
@@ -35,8 +35,8 @@ HnCloneRails::Application.routes.draw do
 
   #Comment Routes
 
-  resources :comments :only => [:index, :create, :new, :show, :delete]
-  
+  resources :comments, :only => [:index, :create, :new, :show, :delete]
+
   # get 'comments' => 'comments#index'
 
   # get 'comments/new' => 'comments#new'
@@ -47,7 +47,13 @@ HnCloneRails::Application.routes.draw do
 
   # delete 'comments/:id' => 'comments#delete'
 
+  #
 
+  resources :sessions, :only => [:new, :create, :destroy]
+
+  match '/signup',  to: 'users#new'
+  match '/signin',  to: 'sessions#new'
+  match '/signout', to: 'sessions#destroy', via: :delete
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

@@ -14,9 +14,15 @@ class UsersController < ApplicationController
 
 
   def create
-    @user = User.create(params[:user])
-    redirect_to user_path(@user)
-                # :notice => 'User was successfully created.')
+    @user = User.new(params[:user])
+    if @user.valid?
+      @user.save
+      sign_in @user
+      flash[:success] = "Welcome to the Sample App!"
+      redirect_to @user
+    else
+      render :new
+    end
   end
 
   def edit
